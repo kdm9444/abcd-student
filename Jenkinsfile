@@ -19,13 +19,18 @@ pipeline {
             }
         }
         stage('Run ZAP DAST Scan'){
+            agent {
+                docker {
+                    image 'zaproxy/zap-stable'
+                    args '-v $(pwd):/zap/wrk/'
+                }
+            }
             steps{
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
                 sh 'echo $REPORT_TITLE'
-                sh 'ls -la $(pwd)/.zap'
-                sh 'docker run --rm -e "AUTH_TOKEN=$AUTH_TOKEN" -e "REPORT_TITLE=$REPORT_TITLE" -v "$(pwd):/zap/wrk/" zaproxy/zap-stable \
-                    bash -c "\
-                    ls -la /zap/wrk
+                sh 'ls -la'
+                sh 'ls -la /zap/wrk/'
+                sh 'bash -c "\
                     zap.sh -cmd -addonupdate; \
                     zap.sh -cmd -addoninstall communityScripts \
                     -addoninstall pscanrulesAlpha \
