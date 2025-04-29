@@ -29,7 +29,7 @@ pipeline {
                     -addoninstall pscanrulesAlpha \
                     -addoninstall pscanrulesBeta \
                     -addoninstall graaljs \
-                    -autorun /zap/wrk/zap.yaml"'
+                    -autorun /zap/wrk/.zap/passive.yaml"'
             }
         }
     }
