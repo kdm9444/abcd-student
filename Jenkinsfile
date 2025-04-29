@@ -25,6 +25,8 @@ pipeline {
                 sh 'ls -la $(pwd)/.zap'
                 sh 'docker run --rm -e "AUTH_TOKEN=$AUTH_TOKEN" -e "REPORT_TITLE=$REPORT_TITLE" -v "$(pwd):/zap/wrk/" zaproxy/zap-stable \
                     bash -c "\
+                    ls -la
+                    ls -la /zap/wrk
                     zap.sh -cmd -addonupdate; \
                     zap.sh -cmd -addoninstall communityScripts \
                     -addoninstall pscanrulesAlpha \
