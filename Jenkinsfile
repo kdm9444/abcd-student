@@ -24,6 +24,7 @@ pipeline {
                 sh 'echo $REPORT_TITLE'
                 sh 'docker run --rm -v "$(pwd):/zap/wrk/" --name owasp zaproxy/zap-stable \
                     bash -c "\
+                    ls -la / \
                     ls -la ./wrk"'
             }
         }
