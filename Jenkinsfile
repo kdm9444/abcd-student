@@ -22,7 +22,7 @@ pipeline {
             steps{
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
                 sh 'echo $REPORT_TITLE'
-                sh 'docker run --rm -e "REPORT_TITLE=$REPORT_TITLE" -v "$(pwd):/zap/wrk/" --name owasp zaproxy/zap-stable \
+                sh 'docker run --rm -v "$(pwd):/zap/wrk/" --name owasp zaproxy/zap-stable \
                     bash -c "\
                     ls -la ./wrk"'
             }
