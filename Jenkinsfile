@@ -22,7 +22,7 @@ pipeline {
             steps{
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
                 sh 'echo $REPORT_TITLE'
-                sh 'ls -la $(pwd)'
+                sh 'ls -la $(pwd)/.zap'
                 sh 'docker run --rm -e "AUTH_TOKEN=$AUTH_TOKEN" -e "REPORT_TITLE=$REPORT_TITLE" -v "$(pwd):/zap/wrk/" zaproxy/zap-stable \
                     bash -c "\
                     zap.sh -cmd -addonupdate; \
