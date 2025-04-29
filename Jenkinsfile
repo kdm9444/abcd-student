@@ -18,5 +18,11 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        stage('Run ZAP DAST Scan'){
+            steps{
+                sh 'export REPORT_TITLE="report_$(date +%s)"'
+                sh 'echo $REPORT_TITLE'
+            }
+        }
     }
 }
