@@ -20,7 +20,6 @@ pipeline {
         }
         stage('Run ZAP DAST Scan'){
             steps{
-                sh 
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
                 sh 'echo $REPORT_TITLE'
                 sh 'ls -la $(pwd)'
