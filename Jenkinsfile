@@ -15,7 +15,6 @@ pipeline {
         stage('Run JuiceShop'){
             steps{
                 sh 'docker run -d --rm --name juice-shop -p 3000:3000 bkimminich/juice-shop' 
-                sh 'docker ps'
             }
         }
         stage('Run ZAP DAST Scan'){
@@ -41,6 +40,7 @@ pipeline {
         always {
             echo "Cleaning up..."
             sh "docker container stop juice-shop || true"
+            sh "docker container rm juice-shop || true"
             sh 'ls -la reports'
         }
         success {
