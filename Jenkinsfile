@@ -42,8 +42,6 @@ pipeline {
             echo "Cleaning up..."
             sh "docker container stop juice-shop || true"
             sh 'ls -la reports'
-            sh "ls -la /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD"
-            sh "ls -la /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD/reports"
         }
         success {
             archiveArtifacts artifacts: './reports/**/*.*', fingerprint: true
