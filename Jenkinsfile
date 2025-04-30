@@ -28,10 +28,9 @@ pipeline {
                     docker run --rm \
                     --add-host=host.docker.internal:host-gateway \
                     -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk \
-                    -e REPORT_TITLE="zap_report" \
+                    -e REPORT_TITLE="zap_report_$(date +%s)" \
                     zaproxy/zap-stable \
                     bash -c "\
-                        ls -la; \
                         zap.sh -cmd -addonupdate; \
                         zap.sh -cmd -addoninstall communityScripts \
                         -addoninstall pscanrulesAlpha \
@@ -50,9 +49,10 @@ pipeline {
         always {
             echo "Cleaning up..."
             sh "docker container stop juice-shop || true"
+            sh "ls -la ./report"
         }
         success {
-            archiveArtifacts artifacts: '/var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD/report/*', fingerprint: true
+            archiveArtifacts artifacts: '/var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD/report/**', fingerprint: true
         }
     }
 }
