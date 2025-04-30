@@ -25,7 +25,7 @@ pipeline {
                 sh 'mkdir reports'
                 sh 'chmod 777 reports'
                 sh """
-                    docker run --add-host=host.docker.internal:host-gateway --rm -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk zaproxy/zap-stable \
+                    docker run -e "REPORT_TITLE=$REPORT_TITLE" --add-host=host.docker.internal:host-gateway --rm -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk zaproxy/zap-stable \
                     bash -c "\
                         ls -la; \
                         zap.sh -cmd -addonupdate; \
