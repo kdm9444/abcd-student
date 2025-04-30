@@ -28,6 +28,7 @@ pipeline {
                     docker run --rm \
                     --add-host=host.docker.internal:host-gateway \
                     -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk \
+                    -e REPORT_TITLE="report_$(date +%s)"
                     zaproxy/zap-stable \
                     bash -c "\
                         ls -la; \
