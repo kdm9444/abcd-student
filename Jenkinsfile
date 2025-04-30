@@ -18,6 +18,12 @@ pipeline {
                 sh 'ls -la'
             }
         }
+        stage('Run JuiceShop'){
+            steps{
+                sh 'docker run --rm bkimminich/juice-shop' 
+                sh 'docker ps'
+            }
+        }
         stage('Run ZAP DAST Scan'){
             steps{
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
@@ -29,6 +35,11 @@ pipeline {
                     ls -la /zap; \
                     ls -la /zap/wrk; \
                     ls -la ./wrk"'
+            }
+        }
+        stage('Check docker'){
+            steps{
+                sh 'docker ps'
             }
         }
     }
