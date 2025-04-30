@@ -30,12 +30,7 @@ pipeline {
                 sh 'echo $REPORT_TITLE'
                 sh 'ls -la $(pwd)'
                 sh """
-                    docker run --rm --name zaproxy -v $PWD:/zap/wrk zaproxy/zap-stable \
-                    bash -c "\
-                    ls -la /; \
-                    ls -la /zap; \
-                    ls -la /zap/wrk; \
-                    ls -la ./wrk" 
+                    docker run --rm --name zaproxy -v ${env.WORKSPACE}:/zap/wrk zaproxy/zap-stable ls -la /zap/wrk
                     """
             }
         }
