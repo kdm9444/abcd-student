@@ -19,9 +19,6 @@ pipeline {
             }
         }
         stage('Run ZAP DAST Scan'){
-            environment {
-                REPORT_TITLE = "zap_report_$(date +%s)"
-            }
             steps{
                 sh 'mkdir reports'
                 sh 'chmod 777 reports'
@@ -29,7 +26,6 @@ pipeline {
                     docker run --rm \
                     --add-host=host.docker.internal:host-gateway \
                     -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk \
-                    -e REPORT_TITLE="zap_report_${REPORT_TITLE}" \
                     zaproxy/zap-stable \
                     bash -c "\
                         zap.sh -cmd -addonupdate; \
@@ -38,11 +34,6 @@ pipeline {
                         -addoninstall pscanrulesBeta \
                         -autorun /zap/wrk/.zap/passive.yaml" 
                     """
-            }
-        }
-        stage('Check docker'){
-            steps{
-                sh 'docker ps'
             }
         }
     }
