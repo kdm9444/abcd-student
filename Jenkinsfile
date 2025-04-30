@@ -44,7 +44,7 @@ pipeline {
             sh 'ls -la reports'
         }
         success {
-            archiveArtifacts artifacts: './reports/**/*.*', fingerprint: true
+            archiveArtifacts artifacts: 'reports/**/*.*', fingerprint: true
         }
     }
 }
