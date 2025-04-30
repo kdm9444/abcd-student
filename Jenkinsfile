@@ -26,7 +26,6 @@ pipeline {
                 sh 'chmod 777 reports'
                 sh """
                     docker run --rm \
-                    -e REPORT_TITLE="$REPORT_TITLE" \
                     --add-host=host.docker.internal:host-gateway \
                     -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk \
                     zaproxy/zap-stable \
