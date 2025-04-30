@@ -23,9 +23,10 @@ pipeline {
                 sh 'export REPORT_TITLE="report_$(date +%s)"'
                 sh 'echo $REPORT_TITLE'
                 sh 'mkdir reports'
+                sh 'mkdir reports'
                 sh """
                     docker run --add-host=host.docker.internal:host-gateway --rm -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk zaproxy/zap-stable \
-                    bash -c "\ 
+                    bash -c "\
                         zap.sh -cmd -addonupdate; \
                         zap.sh -cmd -addoninstall communityScripts \
                         -addoninstall pscanrulesAlpha \
