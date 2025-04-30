@@ -27,6 +27,7 @@ pipeline {
                 sh """
                     docker run --add-host=host.docker.internal:host-gateway --rm -v /var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD:/zap/wrk zaproxy/zap-stable \
                     bash -c "\
+                        ls -la; \
                         zap.sh -cmd -addonupdate; \
                         zap.sh -cmd -addoninstall communityScripts \
                         -addoninstall pscanrulesAlpha \
