@@ -44,7 +44,7 @@ pipeline {
             sh "ls -la ./report"
         }
         success {
-            archiveArtifacts artifacts: '/var/lib/docker/volumes/abcd-lab/_data/workspace/ABCD/report/**', fingerprint: true
+            archiveArtifacts artifacts: './reports/**/*.*', fingerprint: true
         }
     }
 }
