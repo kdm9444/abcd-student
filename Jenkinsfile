@@ -12,6 +12,20 @@ pipeline {
                 }
             }
         }
+
+        stage('Create reports directory') {
+            steps {
+                sh 'mkdir reports'
+                sh 'chmod 777 reports'
+            }
+        }
+
+        stage('Run OSV Scan'){
+            steps {
+                sh 'osv-scanner --format json --output reports/osv_json_report.json -L package-lock.json || true'
+            }
+        }
+
         stage('Run JuiceShop'){
             steps{
                 sh 'docker run -d --rm --name juice-shop -p 3000:3000 bkimminich/juice-shop' 
@@ -19,8 +33,6 @@ pipeline {
         }
         stage('Run ZAP DAST Scan'){
             steps{
-                sh 'mkdir reports'
-                sh 'chmod 777 reports'
                 sh """
                     docker run --rm \
                     --add-host=host.docker.internal:host-gateway \
