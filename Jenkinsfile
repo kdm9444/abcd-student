@@ -32,6 +32,12 @@ pipeline {
             }
         }
 
+        stage('Run Semgrep Scan'){
+            steps {
+                sh 'semgrep scan --config auto'
+            }
+        }
+
         stage('Run JuiceShop'){
             steps{
                 sh 'docker run -d --rm --name juice-shop -p 3000:3000 bkimminich/juice-shop' 
