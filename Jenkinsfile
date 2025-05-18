@@ -34,7 +34,7 @@ pipeline {
 
         stage('Run Semgrep Scan'){
             steps {
-                sh 'semgrep scan --config auto'
+                sh 'semgrep scan --config auto --json --output reports/semgrep_json_report.json'
             }
         }
 
